@@ -13,21 +13,38 @@ public class CheckForArguments {
 				return cutted;
 			}
 		} else {
-			return 0;
+			throw new NumberFormatException("Number of copies for preserving isn't specified !");
 		}
 	}
 
-	
-	public String checkForFromPathArg(String fromPath){
+	public String checkForFromPathArg(String fromPath) {
 		String cutted = "";
-		
-		if (cutted.toLowerCase().startsWith("-f:")) {
-			if (fromPath.length() < 2) {
-				throw new ArrayIndexOutOfBoundsException("\"Copy from\" argument is incorrect !");
-			} else{
+
+		if (fromPath.toLowerCase().startsWith("-f:")) {
+			if (fromPath.length() < 5) {
+				throw new CopyFromArgNotFoundException();
+			} else {
 				cutted = fromPath.substring(3);
 				return cutted;
 			}
+		} else {
+			throw new CopyFromArgNotFoundException();
 		}
 	}
+
+	public String checkForToPathArg(String toPath) {
+		String cutted = "";
+
+		if (toPath.toLowerCase().startsWith("-t:")) {
+			if (toPath.length() < 5) {
+				throw new CopyToArgNotFoundException();
+			} else {
+				cutted = toPath.substring(3);
+				return cutted;
+			}
+		} else {
+			throw new CopyToArgNotFoundException();
+		}
+	}
+
 }
