@@ -7,8 +7,8 @@ public class Starter {
 
 	// variables
 	int countSpecified;
-	int lastSavedCount;
-	int howManyTimesDone;
+	static int lastSavedCount;
+	static int howManyTimesDone;
 
 	String fromPath;
 	String toPath;
@@ -17,16 +17,25 @@ public class Starter {
 
 	static Starter starter;
 	CheckForArguments checkForArguments;
+	IsConfigFileExist isConfigFileExistClass;
+	LoadConfig loadConfig;
 	ArrayList<String> argArray;
 	// -----------
 
 	public static void main(String[] args) {
 		starter = new Starter();
 		starter.getArguments(args);
+		starter.isConfigFileExistClass.isConfigExist();
+		starter.loadConfig.loadValuesFromConfig();
+		//checkConfig
+		System.out.println(lastSavedCount);
+		System.out.println(howManyTimesDone);
 	}
 
 	public Starter() {
 		checkForArguments = new CheckForArguments();
+		isConfigFileExistClass = new IsConfigFileExist();
+		loadConfig = new LoadConfig();
 		argArray = new ArrayList<>();
 	}
 
