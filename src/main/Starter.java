@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch;
 public class Starter {
 
 	// variables
-	int countSpecified;
+	static int countSpecified;
 	static int lastSavedCount;
 	static int howManyTimesDone;
 
@@ -19,6 +19,7 @@ public class Starter {
 	CheckForArguments checkForArguments;
 	IsConfigFileExist isConfigFileExistClass;
 	LoadConfig loadConfig;
+	CheckConfig checkConfig;
 	ArrayList<String> argArray;
 	// -----------
 
@@ -27,15 +28,16 @@ public class Starter {
 		starter.getArguments(args);
 		starter.isConfigFileExistClass.isConfigExist();
 		starter.loadConfig.loadValuesFromConfig();
-		//checkConfig
-		System.out.println(lastSavedCount);
-		System.out.println(howManyTimesDone);
+		starter.checkConfig.checkCounts();
+		new DoBackup().isPathsCorrect(starter.fromPath, starter.toPath);
+		//writeConfig
 	}
 
 	public Starter() {
 		checkForArguments = new CheckForArguments();
 		isConfigFileExistClass = new IsConfigFileExist();
 		loadConfig = new LoadConfig();
+		checkConfig = new CheckConfig();
 		argArray = new ArrayList<>();
 	}
 
