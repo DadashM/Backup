@@ -23,6 +23,8 @@ public class LoadConfig {
 			while (rs.next()) {
 				Starter.lastSavedCount = rs.getInt("lastSavedCount");
 				Starter.howManyTimesDone = rs.getInt("howManyTimesDone");
+				Starter.lastFromPath = rs.getString("fromPath");
+				Starter.lastToPath = rs.getString("toPath");
 			}
 
 		} catch (Exception e) {

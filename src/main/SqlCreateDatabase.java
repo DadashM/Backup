@@ -29,7 +29,7 @@ public class SqlCreateDatabase {
 		String url = "jdbc:sqlite:" + System.getProperty("user.home") + "\\AppData\\Local\\Backup\\config.db";
 
 		String sql = "CREATE TABLE IF NOT EXISTS counts (\n" + "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n"
-				+ "lastSavedCount INTEGER NOT NULL,\n" + "howManyTimesDone INTEGER NOT NULL);";
+				+ "lastSavedCount INTEGER NOT NULL,\n" + "howManyTimesDone INTEGER NOT NULL,\n" + "fromPath TEXT,\n " + "toPath TEXT);";
 
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -38,7 +38,7 @@ public class SqlCreateDatabase {
 			stmt = c.createStatement();
 			stmt.executeUpdate(sql);
 
-			sql = "INSERT INTO counts (lastSavedCount, howManyTimesDone)\n" + "VALUES (0, 0);";
+			sql = "INSERT INTO counts (lastSavedCount, howManyTimesDone, fromPath, toPath)\n" + "VALUES (0, 0, " + "'" + Starter.fromPath + "'" + ", " + "'" + Starter.toPath + "'" + ");";
 			stmt.executeUpdate(sql);
 
 			stmt.close();

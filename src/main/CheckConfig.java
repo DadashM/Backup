@@ -7,12 +7,14 @@ public class CheckConfig {
 	public void checkCounts() {
 		doBackup = new DoBackup();
 
-		if (Starter.countSpecified == Starter.lastSavedCount) {
+		if (Starter.countSpecified == Starter.lastSavedCount && Starter.fromPath.equals(Starter.lastFromPath) && Starter.toPath.equals(Starter.lastToPath)) {
 			checkForHowManyTimesDone(doBackup);
 		} else {
 			Starter.lastSavedCount = Starter.countSpecified;
+			Starter.lastFromPath = Starter.fromPath;
+			Starter.lastToPath = Starter.toPath;
 			Starter.howManyTimesDone = 0;
-//			doBackup.makeBackup();
+			doBackup.isPathsCorrect(Starter.fromPath, Starter.toPath);
 			Starter.howManyTimesDone = Starter.countSpecified == 0 ? 0 : Starter.howManyTimesDone++;
 		}
 	}
@@ -21,13 +23,13 @@ public class CheckConfig {
 		if (Starter.countSpecified != 0) {
 			if (Starter.lastSavedCount == Starter.howManyTimesDone) {
 				doBackup.removeOldFolder();
-//				doBackup.makeBackup();
+				doBackup.isPathsCorrect(Starter.fromPath, Starter.toPath);
 			} else {
-//				doBackup.makeBackup();
+				doBackup.isPathsCorrect(Starter.fromPath, Starter.toPath);
 				Starter.howManyTimesDone++;
 			}
 		} else {
-//			doBackup.makeBackup();
+			doBackup.isPathsCorrect(Starter.fromPath, Starter.toPath);
 		}
 	}
 }

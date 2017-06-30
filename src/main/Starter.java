@@ -10,8 +10,10 @@ public class Starter {
 	static int lastSavedCount;
 	static int howManyTimesDone;
 
-	String fromPath;
-	String toPath;
+	static String fromPath;
+	static String toPath;
+	static String lastFromPath;
+	static String lastToPath;
 
 	// object references
 
@@ -29,8 +31,9 @@ public class Starter {
 		starter.isConfigFileExistClass.isConfigExist();
 		starter.loadConfig.loadValuesFromConfig();
 		starter.checkConfig.checkCounts();
-		new DoBackup().isPathsCorrect(starter.fromPath, starter.toPath);
+		new DoBackup().removeOldFolder();
 		//writeConfig
+		//makeLogs
 	}
 
 	public Starter() {
