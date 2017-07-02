@@ -14,6 +14,7 @@ public class Starter {
 	static String toPath;
 	static String lastFromPath;
 	static String lastToPath;
+	static boolean skipTableUpdate;
 
 	// object references
 
@@ -22,6 +23,7 @@ public class Starter {
 	IsConfigFileExist isConfigFileExistClass;
 	LoadConfig loadConfig;
 	CheckConfig checkConfig;
+	WriteToConfig writeToConfig;
 	ArrayList<String> argArray;
 	// -----------
 
@@ -31,8 +33,9 @@ public class Starter {
 		starter.isConfigFileExistClass.isConfigExist();
 		starter.loadConfig.loadValuesFromConfig();
 		starter.checkConfig.checkCounts();
-		new DoBackup().removeOldFolder();
-		//writeConfig
+		if (!skipTableUpdate) {
+			starter.writeToConfig.updateRecords();
+		}
 		//makeLogs
 	}
 
@@ -41,6 +44,7 @@ public class Starter {
 		isConfigFileExistClass = new IsConfigFileExist();
 		loadConfig = new LoadConfig();
 		checkConfig = new CheckConfig();
+		writeToConfig = new WriteToConfig();
 		argArray = new ArrayList<>();
 	}
 
