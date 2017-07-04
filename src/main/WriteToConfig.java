@@ -26,7 +26,7 @@ public class WriteToConfig {
 			stmt = c.createStatement();
 			stmt.executeUpdate(sql);
 
-			sql = "INSERT INTO counts (lastSavedCount, howManyTimesDone, fromPath, toPath)\n" + "VALUES (" + Starter.lastSavedCount + ", " + Starter.howManyTimesDone + ", " + "'" + Starter.lastFromPath + "'" + ", " + "'" + Starter.lastToPath + "'" + ");";
+			sql = "INSERT INTO counts (lastSavedCount, howManyTimesDone, fromPath, toPath, lastRootBackupFolder)\n" + "VALUES (" + Starter.lastSavedCount + ", " + Starter.howManyTimesDone + ", " + "'" + Starter.lastFromPath + "'" + ", " + "'" + Starter.lastToPath + "'" + ", " + "'" + Starter.lastRootBackupFolder + "'" + ");";
 			stmt.executeUpdate(sql);
 
 			stmt.close();

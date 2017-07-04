@@ -27,7 +27,7 @@ public class DoBackup {
 	}
 
 	public void removeOldFolder() {
-		File backupPath = new File(Starter.lastToPath);
+		File backupPath = new File(Starter.lastRootBackupFolder);
 		List<Long> foldersInBackupDir = new ArrayList<>();
 		List<File> foldersInBackupDirFile = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class DoBackup {
 		File fromPath = new File(from);
 		File toPath = new File(to);
 		File createBackupFolder;
-		SimpleDateFormat format = new SimpleDateFormat("dd-MM-YY_HH-mm-ss");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-YYYY_HH-mm-ss");
 		Date date = new Date();
 
 		if (fromPath.exists() && toPath.exists()) {
@@ -65,15 +65,37 @@ public class DoBackup {
 				if (fromPath.isDirectory()) {
 					if (fromPath.getName().equals("")) {
 						createBackupFolder = new File(
-								toPath + "\\" + fromPath.getAbsolutePath().substring(0, 1) + "_" + format.format(date));
-						createBackupFolder.mkdir();
+								toPath + "\\" + fromPath.getAbsolutePath().substring(0, 1) + "_Backup\\");
+						if (!createBackupFolder.exists()) {
+							Starter.howManyTimesDone = 0;
+						}
+						Starter.lastRootBackupFolder = createBackupFolder.getAbsolutePath();
+						createBackupFolder = new File(toPath + "\\" + fromPath.getAbsolutePath().substring(0, 1)
+								+ "_Backup\\" + fromPath.getAbsolutePath().substring(0, 1) + "_" + format.format(date));
+						System.out.println(createBackupFolder.getAbsolutePath());
+
+						createBackupFolder.mkdirs();
 					} else {
-						createBackupFolder = new File(toPath + "\\" + fromPath.getName() + "_" + format.format(date));
-						createBackupFolder.mkdir();
+						createBackupFolder = new File(toPath + "\\" + fromPath.getName() + "_Backup\\");
+						if (!createBackupFolder.exists()) {
+							Starter.howManyTimesDone = 0;
+						}
+						Starter.lastRootBackupFolder = createBackupFolder.getAbsolutePath();
+						createBackupFolder = new File(toPath + "\\" + fromPath.getName() + "_Backup\\"
+								+ fromPath.getName() + "_" + format.format(date));
+						System.out.println(createBackupFolder.getAbsolutePath());
+						createBackupFolder.mkdirs();
 					}
 				} else {
-					createBackupFolder = new File(toPath + "\\" + fromPath.getName() + "_" + format.format(date));
-					createBackupFolder.mkdir();
+					createBackupFolder = new File(toPath + "\\" + fromPath.getName() + "_Backup\\");
+					if (!createBackupFolder.exists()) {
+						Starter.howManyTimesDone = 0;
+					}
+					Starter.lastRootBackupFolder = createBackupFolder.getAbsolutePath();
+					createBackupFolder = new File(toPath + "\\" + fromPath.getName() + "_Backup\\" + fromPath.getName()
+							+ "_" + format.format(date));
+					System.out.println(createBackupFolder.getAbsolutePath());
+					createBackupFolder.mkdirs();
 				}
 
 				makeBackup(fromPath.getAbsolutePath(), createBackupFolder.getAbsolutePath());

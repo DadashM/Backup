@@ -14,6 +14,7 @@ public class Starter {
 	static String toPath;
 	static String lastFromPath;
 	static String lastToPath;
+	static String lastRootBackupFolder;
 	static boolean skipTableUpdate;
 
 	// object references
@@ -36,6 +37,7 @@ public class Starter {
 		if (!skipTableUpdate) {
 			starter.writeToConfig.updateRecords();
 		}
+		System.out.println(lastRootBackupFolder);
 		//makeLogs
 	}
 

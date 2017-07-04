@@ -13,7 +13,6 @@ public class SqlCreateDatabase {
 		try (Connection conn = DriverManager.getConnection(url)) {
 			if (conn != null) {
 				DatabaseMetaData meta = conn.getMetaData();
-				System.out.println("Driver name: " + meta.getDriverName());
 			}
 			conn.close();
 		} catch (Exception e) {
@@ -29,7 +28,7 @@ public class SqlCreateDatabase {
 		String url = "jdbc:sqlite:" + System.getProperty("user.home") + "\\AppData\\Local\\Backup\\config.db";
 
 		String sql = "CREATE TABLE IF NOT EXISTS counts (\n" + "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n"
-				+ "lastSavedCount INTEGER NOT NULL,\n" + "howManyTimesDone INTEGER NOT NULL,\n" + "fromPath TEXT,\n " + "toPath TEXT);";
+				+ "lastSavedCount INTEGER NOT NULL,\n" + "howManyTimesDone INTEGER NOT NULL,\n" + "fromPath TEXT,\n " + "toPath TEXT,\n" + "lastRootBackupFolder TEXT);";
 
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -38,7 +37,7 @@ public class SqlCreateDatabase {
 			stmt = c.createStatement();
 			stmt.executeUpdate(sql);
 
-			sql = "INSERT INTO counts (lastSavedCount, howManyTimesDone, fromPath, toPath)\n" + "VALUES (0, 0, " + "'" + Starter.fromPath + "'" + ", " + "'" + Starter.toPath + "'" + ");";
+			sql = "INSERT INTO counts (lastSavedCount, howManyTimesDone, fromPath, toPath, lastRootBackupFolder)\n" + "VALUES (0, 0, " + "'" + Starter.fromPath + "'" + ", " + "'" + Starter.toPath + "'" + ", " + "'" + Starter.lastRootBackupFolder + "'" + ");";
 			stmt.executeUpdate(sql);
 
 			stmt.close();

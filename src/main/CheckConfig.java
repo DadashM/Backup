@@ -7,21 +7,21 @@ public class CheckConfig {
 	public void checkCounts() {
 		doBackup = new DoBackup();
 
-		if (Starter.countSpecified == Starter.lastSavedCount && Starter.fromPath.equals(Starter.lastFromPath) && Starter.toPath.equals(Starter.lastToPath)) {
+		if (Starter.countSpecified == Starter.lastSavedCount && Starter.fromPath.equals(Starter.lastFromPath)
+				&& Starter.toPath.equals(Starter.lastToPath)) {
 			checkForHowManyTimesDone(doBackup);
 		} else {
 			Starter.lastSavedCount = Starter.countSpecified;
 			Starter.lastFromPath = Starter.fromPath;
 			Starter.lastToPath = Starter.toPath;
 			Starter.howManyTimesDone = 0;
+			Starter.lastRootBackupFolder = "";
 			doBackup.isPathsCorrect(Starter.fromPath, Starter.toPath);
-			System.out.println(Starter.howManyTimesDone);
 			if (Starter.countSpecified == 0) {
 				Starter.howManyTimesDone = 0;
-			}else {
+			} else {
 				Starter.howManyTimesDone++;
 			}
-			System.out.println(Starter.howManyTimesDone);
 		}
 	}
 

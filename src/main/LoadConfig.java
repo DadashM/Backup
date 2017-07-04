@@ -25,6 +25,7 @@ public class LoadConfig {
 				Starter.howManyTimesDone = rs.getInt("howManyTimesDone");
 				Starter.lastFromPath = rs.getString("fromPath");
 				Starter.lastToPath = rs.getString("toPath");
+				Starter.lastRootBackupFolder = rs.getString("lastRootBackupFolder");
 			}
 
 		} catch (Exception e) {
